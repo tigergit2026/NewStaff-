@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Training — New Staff Induction</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.6; background: #f8f9fa; }
+
+        /* Header */
+        .site-header { background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; padding: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; }
+        .site-logo { display: flex; align-items: center; gap: 15px; }
+        .site-logo .logo-box { width: 42px; height: 42px; background: #d4a843; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; color: #1e3a5f; }
+        .site-logo h1 { font-size: 22px; font-weight: 700; }
+        .site-logo .subtitle { font-size: 13px; opacity: 0.85; }
+        .header-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; margin-left: 20px; }
+
+        /* Nav */
+        .main-nav { background: #152a47; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; gap: 0; }
+        .nav-container a { color: white; text-decoration: none; padding: 14px 22px; display: block; font-size: 14px; font-weight: 500; border-bottom: 3px solid transparent; transition: background 0.3s, border-color 0.3s; }
+        .nav-container a:hover, .nav-container a.active { background: rgba(255,255,255,0.1); border-bottom-color: #d4a843; }
+
+        /* Content */
+        .site-content { max-width: 1200px; margin: 30px auto; padding: 0 30px; display: flex; gap: 30px; }
+        .content-area { flex: 1; min-width: 0; }
+        .widget-area { width: 300px; flex-shrink: 0; }
+        .widget { background: white; border-radius: 8px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+        .widget h3 { color: #1e3a5f; font-size: 16px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #d4a843; }
+        .widget ul { list-style: none; padding-left: 0; }
+        .widget li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+        .widget li:last-child { border-bottom: none; }
+        .widget a { color: #2c5282; text-decoration: none; font-size: 14px; }
+        .widget a:hover { color: #d4a843; }
+
+        /* Page header */
+        .page-header { background: white; border-radius: 8px; padding: 35px 40px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #d4a843; }
+        .page-header.hero { background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; border-left: none; }
+        .page-header h1 { color: #1e3a5f; font-size: 28px; margin-bottom: 10px; }
+        .page-header.hero h1 { color: white; }
+        .page-header .page-subtitle { color: #666; font-size: 16px; }
+        .page-header.hero .page-subtitle { color: rgba(255,255,255,0.9); }
+
+        /* Content block */
+        .content-block { background: white; border-radius: 8px; padding: 35px 40px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+        .content-block h2 { color: #1e3a5f; font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #e8edf2; }
+        .content-block h3 { color: #2c5282; font-size: 18px; margin: 25px 0 15px; }
+        .content-block p { margin-bottom: 15px; font-size: 15px; }
+
+        /* Principle cards */
+        .principle-card { background: #f8f9fa; border-left: 4px solid #2c5282; padding: 20px 25px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+        .principle-card.highlight { border-left-color: #d4a843; background: #fffdf5; }
+        .principle-number { display: inline-block; background: #1e3a5f; color: white; width: 32px; height: 32px; border-radius: 50%; text-align: center; line-height: 32px; font-weight: 700; font-size: 14px; margin-right: 10px; }
+        .principle-card h3 { display: inline; color: #1e3a5f; font-size: 17px; margin: 0; }
+
+        /* Tables */
+        .checklist-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .checklist-table th { background: #1e3a5f; color: white; padding: 14px 18px; text-align: left; font-weight: 600; }
+        .checklist-table th:first-child { background: #2c5282; }
+        .checklist-table td { padding: 12px 18px; border-bottom: 1px solid #e8edf2; vertical-align: top; }
+        .checklist-table tr:nth-child(even) td { background: #f8f9fa; }
+        .checklist-table tr:hover td { background: #fff8e7; }
+        .do-item::before { content: "✓"; color: #2ea44f; font-weight: bold; margin-right: 8px; }
+        .dont-item::before { content: "✗"; color: #d73a49; font-weight: bold; margin-right: 8px; }
+
+        /* Numbered list */
+        .numbered-list { list-style: none; counter-reset: item; padding-left: 0; }
+        .numbered-list li { counter-increment: item; margin-bottom: 15px; padding-left: 45px; position: relative; }
+        .numbered-list li::before { content: counter(item); background: #2c5282; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; position: absolute; left: 0; top: 2px; }
+
+        /* Quote box */
+        .quote-box { background: #f0f4f8; border-left: 4px solid #d4a843; padding: 20px 25px; margin: 20px 0; font-style: italic; color: #555; border-radius: 0 8px 8px 0; }
+        .quote-box.warning { background: #fff5f5; border-left-color: #d73a49; }
+
+        /* Reference list */
+        .reference-list { list-style: none; padding-left: 0; counter-reset: ref; }
+        .reference-list li { padding: 10px 0 10px 25px; text-indent: -25px; font-size: 14px; line-height: 1.7; border-bottom: 1px solid #f0f0f0; }
+        .reference-list li::before { content: "[" counter(ref) "] "; counter-increment: ref; font-weight: 600; color: #2c5282; }
+
+        /* Buttons */
+        .btn { display: inline-block; background: #d4a843; color: #1e3a5f; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s; border: none; cursor: pointer; }
+        .btn:hover { background: #c4962e; color: white; }
+        .btn-secondary { background: #2c5282; color: white; }
+        .btn-secondary:hover { background: #1e3a5f; }
+
+        /* Grid */
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; }
+        .module-card { border: 1px solid #e8edf2; border-left: 4px solid #2c5282; border-radius: 8px; padding: 20px 25px; cursor: pointer; transition: box-shadow 0.3s; text-decoration: none; color: inherit; display: block; }
+        .module-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .module-card.gold-border { border-left-color: #d4a843; }
+
+        /* Footer */
+        .site-footer { background: #1e3a5f; color: white; padding: 40px 0 20px; margin-top: 60px; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .footer-widget h4 { font-size: 16px; margin-bottom: 20px; color: #d4a843; }
+        .footer-widget p, .footer-widget a { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.8; text-decoration: none; }
+        .footer-widget a:hover { color: #d4a843; }
+        .footer-bottom { max-width: 1200px; margin: 30px auto 0; padding: 20px 30px 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 13px; color: rgba(255,255,255,0.6); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .site-content { flex-direction: column; padding: 0 15px; }
+            .widget-area { width: 100%; }
+            .nav-container { flex-wrap: wrap; }
+            .nav-container a { padding: 10px 15px; font-size: 13px; }
+            .page-header, .content-block { padding: 25px; }
+            .footer-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="header-container">
+        <div class="site-logo">
+            <div class="logo-box">P</div>
+            <div>
+                <h1>Privacy Training</h1>
+                <div class="subtitle">New Staff Induction — News Media</div>
+            </div>
+        </div>
+        <div class="header-links">
+            <a href="#home">Home</a>
+            <a href="#references">References</a>
+        </div>
+    </div>
+</header>
+
+<!-- Navigation -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <a href="#privacy-principles">Privacy Principles</a>
+        <a href="#respect-privacy">Respect Privacy</a>
+        <a href="#confidential-sources">Confidential Sources</a>
+        <a href="#verify-information">Verify Information</a>
+        <a href="#data-transparency">Data Transparency</a>
+        <a href="#compliance-checklist">Compliance Checklist</a>
+    </div>
+</nav>
+
+<div class="site-content">
+    <div class="content-area">
+
+        <!-- Hero -->
+        <div class="page-header hero">
+            <h1>Welcome to Your Privacy Training</h1>
+            <p class="page-subtitle">Understanding privacy principles is essential for everyone working in news media. This training module will guide you through the core privacy principles, explain how they apply in daily work, and help you build good privacy habits.</p>
+            <div style="margin-top: 25px;">
+                <a href="#privacy-principles" class="btn" style="margin-right: 12px;">Start Training</a>
+                <a href="#compliance-checklist" class="btn" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3);">View Checklist</a>
+            </div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="content-block">
+            <h2>About This Training</h2>
+            <p>This training is designed to help new staff understand how privacy principles apply to news media work. It covers the Australian Press Council's Statement of Privacy Principles, the Australian Privacy Principles (APPs), and practical guidance on how to apply these principles in everyday reporting and editing work.</p>
+            <div class="quote-box" style="margin-top: 25px;">
+                <strong>Why It Matters:</strong> Privacy is not just a legal requirement — it's a core professional value. Respecting privacy builds public trust, protects sources, and upholds the integrity of journalism.
+            </div>
+        </div>
+
+        <!-- Module Overview -->
+        <div class="content-block">
+            <h2>Training Modules</h2>
+            <p>Click on any module below to jump to that section.</p>
+            <div class="module-grid">
+                <a href="#privacy-principles" class="module-card">
+                    <div style="color: #1e3a5f; font-size: 16px; font-weight: 600; margin-bottom: 10px;">Module 1: Privacy Principles</div>
+                    <div style="font-size: 14px; color: #666;">Understand the APC Statement of Privacy Principles and APPs that guide all our work.</div>
+                </a>
+                <a href="#respect-privacy" class="module-card gold-border">
+                    <div style="color: #1e3a5f; font-size: 16px; font-weight: 600; margin-bottom: 10px;">Module 2: Respect Privacy When Publishing</div>
+                    <div style="font-size: 14px; color: #666;">Learn how to balance public interest with individuals' right to privacy.</div>
+                </a>
+                <a href="#confidential-sources" class="module-card">
+                    <div style="color: #1e3a5f; font-size: 16px; font-weight: 600; margin-bottom: 10px;">Module 3: Protect Confidential Sources</div>
+                    <div style="font-size: 14px; color: #666;">Know your obligations to protect journalists' sources and confidential information.</div>
+                </a>
+                <a href="#verify-information" class="module-card gold-border">
+                    <div style="color: #1e3a5f; font-size: 16px; font-weight: 600; margin-bottom: 10px;">Module 4: Verify Information Before Publication</div>
+                    <div style="font-size: 14px; color: #666;">Ensure accuracy and take care when handling personal information.</div>
+                </a>
+                <a href="#data-transparency" class="module-card">
+                    <div style="color: #1e3a5f; font-size: 16px; font-weight: 600; margin-bottom: 10px;">Module 5: Be Transparent About Data Use</div>
+                    <div style="font-size: 14px; color: #666;">Understand transparency obligations when collecting and using personal data.</div>
+                </a>
+                <a href="#compliance-checklist" class="module-card gold-border">
+                    <div style="color: #1e3a5f; font-size: 16px; font-weight: 600; margin-bottom: 10px;">Module 6: Privacy Compliance Checklist</div>
+                    <div style="font-size: 14px; color: #666;">A practical DO/DON'T checklist you can use to check your work before publishing.</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Section: Privacy Principles -->
+        <div class="content-block" id="privacy-principles">
+            <h2>Module 1: Privacy Principles</h2>
+            <p>All staff must understand and apply privacy principles in their daily work. These principles come from two main sources:</p>
+            <ul style="padding-left: 25px; margin: 15px 0;">
+                <li style="margin-bottom: 10px;"><strong>Australian Press Council (APC) — Statement of Privacy Principles</strong><br>Applies specifically to news media work.</li>
+                <li style="margin-bottom: 10px;"><strong>Australian Privacy Principles (APPs)</strong><br>Set out in the <em>Privacy Act 1988</em> (Cth), apply to how we handle personal information.</li>
+            </ul>
+
+            <div class="principle-card" style="margin-top: 25px;">
+                <span class="principle-number">1</span><h3>Public Interest Test</h3>
+                <p>Privacy is not an absolute right. Publication is justified when there is a <strong>clear public interest</strong> that outweighs an individual's right to privacy.</p>
+            </div>
+            <div class="principle-card">
+                <span class="principle-number">2</span><h3>Children and Young People</h3>
+                <p>Extra care must be taken when publishing material about children. Their right to privacy is stronger than that of adults.</p>
+            </div>
+            <div class="principle-card">
+                <span class="principle-number">3</span><h3>Health and Personal Tragedy</h3>
+                <p>Avoid intrusive reporting on people experiencing personal tragedy or serious health issues, unless there is a clear public interest justification.</p>
+            </div>
+            <div class="principle-card">
+                <span class="principle-number">4</span><h3>Family and Private Life</h3>
+                <p>Respect individuals' right to keep their family and private life private. Requires a strong public interest justification.</p>
+            </div>
+            <div class="principle-card">
+                <span class="principle-number">5</span><h3>Harassment and Pursuit</h3>
+                <p>Do not harass, pursue, or photograph individuals in a way that invades their privacy, especially in places where they have a reasonable expectation of privacy.</p>
+            </div>
+            <div class="principle-card">
+                <span class="principle-number">6</span><h3>Deception</h3>
+                <p>Avoid the use of deception or surreptitious methods to obtain material, unless there is a strong public interest justification and no other way to obtain the information.</p>
+            </div>
+            <div class="principle-card highlight">
+                <span class="principle-number">7</span><h3>Consent and Awareness</h3>
+                <p>Where possible, seek consent before publishing private information. Individuals should be aware that information they provide may be published.</p>
+            </div>
+            <div class="principle-card">
+                <span class="principle-number">8</span><h3>Correction and Response</h3>
+                <p>Offer individuals who are the subject of critical privacy-related coverage a reasonable opportunity to respond, and correct any inaccuracies promptly.</p>
+            </div>
+        </div>
+
+        <!-- Section: Respect Privacy -->
+        <div class="content-block" id="respect-privacy">
+            <h2>Module 2: Respect Privacy When Publishing</h2>
+            <div class="quote-box">
+                <strong>Everyone has a right to privacy.</strong> The media serves the public interest by publishing information that matters. But publication must be justified by a <em>clear</em> public interest that outweighs the individual's right to privacy.
+            </div>
+            <h3 style="margin-top: 25px;">What Is "Public Interest"?</h3>
+            <ul class="numbered-list">
+                <li>Exposes wrongdoing, corruption, or behaviour that affects the public</li>
+                <li>Protects public health or safety</li>
+                <li>Informs public debate on matters of importance to the community</li>
+                <li>Prevents the public from being misled by someone's actions or statements</li>
+                <li>Reveals significant incompetence or negligence in public office</li>
+            </ul>
+            <p style="margin-top: 20px;">Simply being "newsworthy" or attracting audience attention is <strong>not</strong> the same as being in the public interest.</p>
+        </div>
+
+        <!-- Section: Confidential Sources -->
+        <div class="content-block" id="confidential-sources">
+            <h2>Module 3: Protect Confidential Sources</h2>
+            <p>Protecting confidential sources is a <strong>core professional obligation</strong> for journalists and news organisations. Without the ability to offer confidentiality, many people would not come forward with information that is in the public interest.</p>
+            <h3 style="margin-top: 25px;">Best Practice — Protecting Sources</h3>
+            <ul class="numbered-list">
+                <li><strong>Only collect source information that is necessary.</strong> Do not ask for, record, or store more personal information about a source than you actually need.</li>
+                <li><strong>Use secure communication channels.</strong> Signal or other encrypted messaging tools are recommended for sensitive communications.</li>
+                <li><strong>Do not record source details in shared systems.</strong> Keep source identity records offline, secure, and separate from the story file.</li>
+                <li><strong>Be careful with metadata.</strong> Digital files can contain metadata that reveals who created them or where they were taken. Strip metadata before publishing.</li>
+                <li><strong>Train all staff.</strong> Anyone who may come into contact with source material must understand their obligations.</li>
+            </ul>
+        </div>
+
+        <!-- Section: Verify Information -->
+        <div class="content-block" id="verify-information">
+            <h2>Module 4: Verify Information Before Publication</h2>
+            <p>Publishing inaccurate information — especially about individuals — can cause serious harm and expose the organisation to legal risk. <strong>Verification is not optional.</strong></p>
+            <h3 style="margin-top: 25px;">Steps for Verifying Information</h3>
+            <ul class="numbered-list">
+                <li><strong>Identify your source.</strong> Where did the information come from? Is the source reliable?</li>
+                <li><strong>Corroborate with at least one independent source.</strong> Do not publish on the basis of a single, unverified source.</li>
+                <li><strong>Check documents carefully.</strong> Verify authenticity and currency of court records, company filings, etc.</li>
+                <li><strong>Be careful with social media.</strong> Content is often inaccurate, out-of-date, or taken out of context.</li>
+                <li><strong>Contact the person concerned (where appropriate).</strong> Give them an opportunity to respond <em>before</em> publication.</li>
+                <li><strong>Double-check names, titles, and positions.</strong> Spelling a person's name wrong is a common but avoidable error.</li>
+            </ul>
+        </div>
+
+        <!-- Section: Data Transparency -->
+        <div class="content-block" id="data-transparency">
+            <h2>Module 5: Be Transparent About Data Use</h2>
+            <p>Audiences trust news organisations with their personal information. <strong>Transparency about how we use that data is both a legal obligation and a trust-building measure.</strong></p>
+            <h3 style="margin-top: 25px;">Your Transparency Obligations</h3>
+            <div class="principle-card" style="margin-top: 15px;">
+                <p><strong>1. Have a clear, accessible privacy policy.</strong> It should explain what personal information is collected, why, how it is used, and who it may be disclosed to.</p>
+            </div>
+            <div class="principle-card" style="border-left-color: #d4a843;">
+                <p><strong>2. Notify when collecting personal information.</strong> Individuals should be <strong>informed</strong> when their personal information is being collected.</p>
+            </div>
+            <div class="principle-card">
+                <p><strong>3. Only use information for the stated purpose.</strong> This is a core requirement of APP 6.</p>
+            </div>
+            <div class="principle-card" style="border-left-color: #d4a843;">
+                <p><strong>4. Be careful with third-party tools.</strong> Many news websites use third-party tools that collect user data. Understand what these tools collect.</p>
+            </div>
+        </div>
+
+        <!-- Section: Compliance Checklist -->
+        <div class="content-block" id="compliance-checklist">
+            <h2>Module 6: Privacy Compliance Checklist</h2>
+            <p>Use this checklist <strong>before publishing</strong> any material that involves personal information or touches on privacy.</p>
+            <div class="quote-box" style="background: #fff8e7; border-left-color: #d4a843;">
+                <strong>⚠️ When in doubt — ask.</strong> If you are unsure about a privacy issue, seek guidance from an editor or privacy officer <em>before</em> publishing.
+            </div>
+
+            <h3 style="margin-top: 25px; color: #2ea44f;">DO — Privacy Compliance</h3>
+            <table class="checklist-table">
+                <thead>
+                    <tr><th>Action</th><th>Why It Matters</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="do-item" style="padding-left: 35px;"><strong>Seek guidance</strong> when unsure about a privacy issue</td><td>Getting a second opinion helps avoid mistakes.</td></tr>
+                    <tr><td class="do-item" style="padding-left: 35px;"><strong>Verify information</strong> before publishing, especially personal details</td><td>Verification is a core professional duty.</td></tr>
+                    <tr><td class="do-item" style="padding-left: 35px;"><strong>Consider public interest</strong> — is there a clear justification?</td><td>The justification must be real, not just "it's newsworthy."</td></tr>
+                    <tr><td class="do-item" style="padding-left: 35px;"><strong>Take extra care with children</strong> and vulnerable people</td><td>Children have a stronger right to privacy.</td></tr>
+                    <tr><td class="do-item" style="padding-left: 35px;"><strong>Protect confidential sources</strong> — use secure channels</td><td>Source protection is an ethical and sometimes legal obligation.</td></tr>
+                    <tr><td class="do-item" style="padding-left: 35px;"><strong>Be transparent</strong> about how you collected and will use information</td><td>Transparency builds audience trust and is a legal requirement.</td></tr>
+                    <tr><td class="do-item" style="padding-left: 35px;"><strong>Offer a response opportunity</strong> to people who are the subject of coverage</td><td>Fairness and accuracy; reduces legal risk.</td></tr>
+                    <tr><td class="do-item" style="padding-left: 35px;"><strong>Correct inaccuracies promptly</strong> if you publish something wrong</td><td>Prompt correction demonstrates professionalism.</td></tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 30px; color: #d73a49;">DON'T — Privacy Compliance</h3>
+            <table class="checklist-table">
+                <thead>
+                    <tr><th>Avoid This</th><th>What Could Go Wrong</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="dont-item" style="padding-left: 35px;">Assume all personal information <strong>can be published</strong> just because it was obtained legally</td><td>Legal acquisition ≠ free to publish. Privacy principles still apply.</td></tr>
+                    <tr><td class="dont-item" style="padding-left: 35px;">Use <strong>deception or surreptitious methods</strong> without public interest justification</td><td>May breach ethical standards and legal obligations.</td></tr>
+                    <tr><td class="dont-item" style="padding-left: 35px;">Harass or photograph people <strong>in places where privacy is expected</strong></td><td>Can breach privacy laws and APC principles.</td></tr>
+                    <tr><td class="dont-item" style="padding-left: 35px;">Publish <strong>sensitive personal information</strong> without clear public interest justification</td><td>Sensitive information has higher protection under privacy law.</td></tr>
+                    <tr><td class="dont-item" style="padding-left: 35px;">Share confidential source information <strong>with people who don't need to know</strong></td><td>Breaches confidentiality and may have legal consequences.</td></tr>
+                    <tr><td class="dont-item" style="padding-left: 35px;">Collect or store <strong>more personal information than you need</strong></td><td>Excessive data collection creates unnecessary privacy risk.</td></tr>
+                    <tr><td class="dont-item" style="padding-left: 35px;">Assume the <strong>journalism exemption</strong> gives you a "free pass" on privacy</td><td>The exemption is conditional and does not remove all legal risk.</td></tr>
+                    <tr><td class="dont-item" style="padding-left: 35px;">Ignore a <strong>subpoena or court order</strong></td><td>Ignoring a court order can result in contempt of court.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- References -->
+        <div class="content-block" id="references">
+            <h2>References</h2>
+            <ol class="reference-list">
+                <li>Australia Press Council. (n.d.). <em>Statement of Privacy Principles</em>. https://presscouncil.org.au/...</li>
+                <li>Australian Competition & Consumer Commission. (2024). <em>Digital platform services inquiry — Interim report 8</em>.</li>
+                <li>Australian Government Solicitor. (2024). <em>Legal update no.325</em>. https://www.ags.gov.au/...</li>
+                <li>Australian Government. (2024). <em>Privacy and Other Legislation Amendment Act 2024</em>. https://www.legislation.gov.au/...</li>
+                <li>Australian Law Reform Commission. (2010). <em>Media privacy standards</em>. ALRC Report 108.</li>
+                <li>Australian Law Reform Commission. (n.d.). <em>Serious Invasions of Privacy in the Digital Era</em> (ALRC Report 123).</li>
+                <li>Office of the Australian Information Commissioner. (2020). <em>Part 4: Exemptions</em>.</li>
+                <li>Office of the Australian Information Commissioner. (n.d.a). <em>The Privacy Act</em>.</li>
+                <li>Office of the Australian Information Commissioner. (n.d.b). <em>Australian Privacy Principles</em>.</li>
+                <li>Office of the Australian Information Commissioner. (n.d.c). <em>Australian Privacy Principles quick reference</em>.</li>
+                <li>Office of the Australian Information Commissioner. (n.d.d). <em>Statutory tort for serious invasions of privacy</em>.</li>
+                <li>Parliament of Australia. (2024). <em>Privacy and Other Legislation Amendment Bill 2024</em>.</li>
+                <li>Ward, S. J. A. (2020). Media Harm. In <em>Ethics and the Media: An Introduction</em> (pp. 127–156). Cambridge University Press.</li>
+                <li>Witzleb, N. (2023). Responding to global trends?: privacy law reform in Australia. In <em>Data Disclosure</em>.</li>
+            </ol>
+        </div>
+
+    </div><!-- /content-area -->
+
+    <!-- Sidebar -->
+    <aside class="widget-area">
+        <div class="widget">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#privacy-principles">Privacy Principles</a></li>
+                <li><a href="#respect-privacy">Respect Privacy</a></li>
+                <li><a href="#confidential-sources">Confidential Sources</a></li>
+                <li><a href="#verify-information">Verify Information</a></li>
+                <li><a href="#data-transparency">Data Transparency</a></li>
+                <li><a href="#compliance-checklist">Compliance Checklist</a></li>
+                <li><a href="#references">References</a></li>
+            </ul>
+        </div>
+        <div class="widget" style="background: #fff8e7; border: 1px solid #d4a843;">
+            <h3 style="color: #8a6914;">Need Help?</h3>
+            <p style="font-size: 14px;">If you are unsure about a privacy issue, <strong>always seek guidance</strong> from an editor or the privacy officer before publishing.</p>
+        </div>
+        <div class="widget">
+            <h3>Emergency Contacts</h3>
+            <p style="font-size: 14px; line-height: 1.8;">
+                <strong>Privacy Officer:</strong> [Insert contact]<br><br>
+                <strong>Editor-on-Duty:</strong> [Insert contact]<br><br>
+                <strong>Legal Team:</strong> [Insert contact]
+            </p>
+        </div>
+    </aside>
+</div><!-- /site-content -->
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-widget">
+            <h4>Privacy Training</h4>
+            <p>These training modules are designed to help new staff understand privacy principles and best practices in news media work.</p>
+        </div>
+        <div class="footer-widget">
+            <h4>Quick Links</h4>
+            <p><a href="#privacy-principles">Privacy Principles</a></p>
+            <p><a href="#compliance-checklist">Compliance Checklist</a></p>
+            <p><a href="#references">References</a></p>
+        </div>
+        <div class="footer-widget">
+            <h4>External Resources</h4>
+            <p><a href="https://www.presscouncil.org.au" target="_blank">Australian Press Council</a></p>
+            <p><a href="https://www.oaic.gov.au" target="_blank">OAIC — Privacy Law</a></p>
+            <p><a href="https://www.legislation.gov.au" target="_blank">Commonwealth Legislation</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Privacy Training Program. All rights reserved. | Built for internal staff training purposes.</p>
+    </div>
+</footer>
+
+</body>
+</html>
